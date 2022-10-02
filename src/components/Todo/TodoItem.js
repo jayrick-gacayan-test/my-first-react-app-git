@@ -1,37 +1,42 @@
 import React , { useState, useEffect } from 'react';
 import { TodoButton } from './TodoButton'
-const TodoItem = (props) => {
+export default function TodoItem({
+  todo : { id, title, name, completed }, 
+  handleTodoTask, 
+  deleteTodo, 
+  editTodo 
+}){
     
-    const { todo, handleTodoTask, deleteTodo, editTodo } = props; // destructuring props
-    const { id, title, name } = todo; // destructuring todo
-    
-    const [ completed, setCompleted ] = useState(false);
+  const [ toCompleted, setToCompleted ] = useState(false);
 
-    useEffect(
-        () => {
-            setCompleted(props.todo.completed)
-        }, [props]);
+  useEffect(
+  () => {
+    setToCompleted(completed)
+  }
+  , [completed]);
         
-    return (
-        <li key={ id }
-                className="todo-list-item">
-            <input type="checkbox" 
-                    className="checkbox"
-                    checked={ completed }
-                    onChange={ () => handleTodoTask(id) }/>
-            <span className={ completed ? "todo-completed" : ""} 
-                style={{ padding: "8px", display: "inline-block" }}>{ "Title : " + title } { "Name : " + name }</span>
-            
-            <TodoButton className="style-button-1 float-end button-danger"
-                        buttonContent={ (<i className="bi bi-trash-fill"></i>) }
-                        onClick={ deleteTodo }
-                        data={ id }/>
-            <TodoButton className="style-button-1 float-end button-warning"
-                        buttonContent={ (<i className="bi bi-pen-fill"></i>) }
-                        onClick={ editTodo }
-                        data={ todo } />
-        </li>
-    );
+  return (
+    <li key={ id } 
+      className="todo-list-item">
+      <input type="checkbox" 
+        className="checkbox" 
+        checked={ toCompleted }
+        onChange={ () => handleTodoTask(id) }/>
+      <span className={ completed ? 'todo-completed' : '' } 
+        style={{ 
+          padding: "8px", 
+          display: "inline-block" 
+        }}>
+        { `Title: ${ title } Name: ${ name }` }
+      </span>
+      <TodoButton btnClass="danger" 
+        data={ id } 
+        iconName="trash" 
+        onClick={ deleteTodo }  />
+      <TodoButton btnClass="warning" 
+        iconName="pen" 
+        data={ todo } 
+        onClick={ editTodo } />
+    </li>
+  );
 }
-
-export default TodoItem;
