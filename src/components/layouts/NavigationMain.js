@@ -3,14 +3,17 @@ import { NavLink } from 'react-router-dom';
 
 import NavigationMainItem from './NavigationMainItem';
 import './navigation.main.css';
+import { NavigationSubMenuItem } from './NavigationSubMenuItem';
 
 export default function NavigationMain({ logo }){
 
   useEffect(
     () => {
-        window.addEventListener('scroll', navbarShrink);
+      window.addEventListener('scroll', navbarShrink);
         
-        return () => window.removeEventListener('scroll', navbarShrink);
+      return () => { 
+        window.removeEventListener('scroll', navbarShrink);
+      }
     }
     , []
   );
@@ -53,15 +56,9 @@ export default function NavigationMain({ logo }){
                   role="button" 
                   data-bs-toggle="dropdown">Dropdown</a>
                 <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">Link</a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">Another link</a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">A third link</a>
-                  </li>
+                  <NavigationSubMenuItem href="#" title="First Sub Link" />
+                  <NavigationSubMenuItem href="#" title="Second Sub Link" />
+                  <NavigationSubMenuItem href="#" title="Another Link" />
                 </ul>
               </li>
             </ul>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ButtonFieldAuth } from '../parts/ButtonFieldAuth';
 import { HeaderTitleAuth } from '../parts/HeaderTitleAuth';
 import { InputFieldAuth } from '../parts/InputFieldAuth';
 import './form.style.css';
@@ -42,9 +43,15 @@ export default function UserLogin(){
           <div className="card-body px-5 mt-5">
             <form className="form-style-1"
               onSubmit={ handleSubmit }>
-              <InputFieldAuth inputType="email" property="email" placeholder="email"/>
-              <InputFieldAuth inputType="password" property="password" placeholder="password" />
-              <button type="submit" className="btn btn-primary w-25">Submit</button>
+              <InputFieldAuth inputType="email" 
+                property="email" 
+                placeholder="Email" 
+                handleInputChange={ handleInputChange } />
+              <InputFieldAuth inputType="password" 
+                property="password" 
+                placeholder="Password" 
+                handleInputChange={ handleInputChange } />
+              <ButtonFieldAuth text="Log In" />
             </form>
           </div>
         </div>

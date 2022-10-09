@@ -1,12 +1,12 @@
 import React , { useState, useEffect } from 'react';
 import { TodoButton } from './TodoButton'
 export default function TodoItem({
-  todo : { id, title, name, completed }, 
+  todo, 
   handleTodoTask, 
   deleteTodo, 
   editTodo 
 }){
-    
+  const { id, title, name, completed } = todo;
   const [ toCompleted, setToCompleted ] = useState(false);
 
   useEffect(

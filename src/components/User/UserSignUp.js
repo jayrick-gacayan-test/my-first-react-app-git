@@ -1,4 +1,5 @@
 import React, { useEffect, useState }from 'react';
+import { ButtonFieldAuth } from '../parts/ButtonFieldAuth';
 import { HeaderTitleAuth } from '../parts/HeaderTitleAuth';
 import { InputFieldAuth } from '../parts/InputFieldAuth';
 import './form.style.css';
@@ -42,11 +43,20 @@ export default function UserSignUp(){
             <form className="form-style-1"
               onSubmit={ handleSubmit }>
               <div className="px-5">
-                <InputFieldAuth inputType="email" property="email" placeholder="email" />
-                <InputFieldAuth inputType="password" property="password" placeholder="password" />
-                <InputFieldAuth inputType="password" property="cfpswd" placeholder="confirm password" />
+                <InputFieldAuth inputType="email" 
+                  property="email" 
+                  placeholder="Email" 
+                  handleInputChange={ handleInputChange } />
+                <InputFieldAuth inputType="password" 
+                  property="password" 
+                  placeholder="Password" 
+                  handleInputChange={ handleInputChange } />
+                <InputFieldAuth inputType="password" 
+                  property="cfpswd" 
+                  placeholder="Confirm password" 
+                  handleInputChange={ handleInputChange } />
               </div>
-              <button type="submit" className="btn btn-info w-100 p-3">Sign up</button>
+              <ButtonFieldAuth text="Sign Up" />
             </form>
           </div>
         </div>

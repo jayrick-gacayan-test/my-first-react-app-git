@@ -1,6 +1,8 @@
 import React, { useState, useReducer, useEffect } from 'react';
+
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
+import { HeaderTitle } from '../parts/HeaderTitle';
 
 import '../custom.style/todo.style.css';
 
@@ -19,18 +21,20 @@ export default function TodoContainer(){
     switch(action.type){
       case "ADD": return [...state, action.todo];
       case "DELETE": return state.filter(todo => { return todo.id !== action.id });
-      case "HANDLE_TODO_TASK": return state.map(
-                                (todo) => {
-                                  return todo.id === action.id ? 
-                                  { ...todo, completed: !todo.completed } : todo;
-                                });
-      case "EDIT": return state;
-            case "UPDATE":
-                return state.map(
-                    (todo) => {
-                        return todo.id === action.todoData.id ? action.todoData : todo;
-                    }
-                );
+      case "HANDLE_TODO_TASK": 
+        return state.map(
+          (todo) => {
+            const { id, completed } = todo;
+            return id === action.id ? { ...todo, completed: !completed } : todo;
+          }
+        );
+      case "UPDATE":
+        return state.map(
+          (todo) => {
+              const { todoData } = action;
+              return todo.id === todoData.id ? todoData : todo;
+          }
+        );
       default : return state;
     }
   }
@@ -40,8 +44,7 @@ export default function TodoContainer(){
   useEffect(
     () => {
       // storing todos items
-      const temp = JSON.stringify(todos);
-      localStorage.setItem("todos", temp);
+      localStorage.setItem("todos", JSON.stringify(todos));
     }
     ,[ todos ]
   );
@@ -86,10 +89,7 @@ export default function TodoContainer(){
 
   return (
     <div className="container-fluid margin-big-top">
-      <div className="container-fluid p-5 bg-primary text-white text-center">
-        <h1>Todo Page</h1>
-        <p>Resize this responsive page to see the effect!</p> 
-      </div>
+      <HeaderTitle title="Todo Page" />
             
       <div className="container mt-5">
         <div>

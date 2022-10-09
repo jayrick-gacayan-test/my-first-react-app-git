@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-export default function TodoForm({ isEditing, todoAction, currentTodo }){
+export default function TodoForm({ 
+  isEditing, 
+  todoAction, 
+  currentTodo
+}){
 
   const initialState = {
     id: null,
@@ -17,14 +21,15 @@ export default function TodoForm({ isEditing, todoAction, currentTodo }){
     
   useEffect(
     () => {
-      setTodo(props.currentTodo);
+      setTodo(currentTodo);
     }
-    ,[currentTodo] 
+    ,[isEditing, todoAction, currentTodo] 
   );
 
-  const InputContainer = ({
+  const TodoInputField = ({
     property,
     value,
+    handleInputChange
   }) => {
     return (
       <div className="mb-3">
@@ -56,16 +61,12 @@ export default function TodoForm({ isEditing, todoAction, currentTodo }){
           setTodo(initialState);
         }
     }>
-      <InputContainer property="Title" value={ todo.title } />
-      <InputContainer property="Name" value={ todo.name } />
+      <TodoInputField property="Title" value={ todo.title } handleInputChange={ handleInputChange }/>
+      <TodoInputField property="Name" value={ todo.name } handleInputChange={ handleInputChange }/>
             
-      <button className="style-button-1 button-success"
-        style={{ 
-          width: "60%", 
-          margin: "auto", 
-          textAlign: "center", 
-          display: "block"
-        }}>{ !isEditing ? "Add" : "Edit"} todo</button>
+      <button className="style-button-1 button-success m-auto text-center d-block"
+        style={{ width: "60%"}}>
+        { !isEditing ? "Add" : "Edit"} todo</button>
     </form>
   );
 }
